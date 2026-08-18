@@ -37,5 +37,7 @@ namespace biv {
 			virtual void create_flying_enemy(
 				const Coord& top_left, const int width, const int height) = 0;
 
+			virtual void create_jumping_enemy(
+				const Coord& top_left, const int width, const int height) = 0;
 	};
 }

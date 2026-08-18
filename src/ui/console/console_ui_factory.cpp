@@ -107,3 +107,14 @@ void ConsoleUIFactory::create_flying_enemy(
 	game->add_collisionable(fEnemy);
 	game_map->add_obj(fEnemy);
 }
+
+void ConsoleUIFactory::create_jumping_enemy(
+	const Coord& top_left,const int width, const int height
+) {
+	ConsoleJumpingEnemy* jEnemy = new ConsoleJumpingEnemy(top_left,width,height);
+	jumping.push_back(jEnemy);
+	game->add_map_movable(jEnemy);
+	game->add_movable(jEnemy);
+	game->add_collisionable(jEnemy);
+	game_map->add_obj(jEnemy);
+}
