@@ -96,3 +96,14 @@ biv::GameMap* ConsoleUIFactory::get_game_map(const int height, const int width) 
 biv::Mario* ConsoleUIFactory::get_mario() {
 	return mario;
 }
+
+void ConsoleUIFactory::create_flying_enemy(
+	const Coord& top_left,const int width, const int height
+) {
+	ConsoleFlyingEnemy* fEnemy = new ConsoleFlyingEnemy(top_left,width,height);
+	flying.push_back(fEnemy);
+	game->add_map_movable(fEnemy);
+	game->add_movable(fEnemy);
+	game->add_collisionable(fEnemy);
+	game_map->add_obj(fEnemy);
+}
