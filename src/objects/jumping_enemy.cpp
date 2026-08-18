@@ -19,7 +19,7 @@ void JumpingEnemy::process_vertical_static_collision(Rect*) noexcept{
 	jump();
 }
 
-void JumpingEnemy::jump() noexcept{
-	vspeed -= JUMP_STRENGTH;
-}
+//void JumpingEnemy::jump() noexcept{
+//	vspeed -= JUMP_STRENGTH;
+//}
 

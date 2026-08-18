@@ -12,6 +12,6 @@ namespace biv {
 			void process_horizontal_static_collision(Rect*) noexcept override;
 			void process_vertical_static_collision(Rect*) noexcept override;
 
-			void jump() noexcept;
+			//void jump() noexcept;
 	};
 }
