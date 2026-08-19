@@ -118,3 +118,15 @@ void ConsoleUIFactory::create_jumping_enemy(
 	game->add_collisionable(jEnemy);
 	game_map->add_obj(jEnemy);
 }
+
+void ConsoleUIFactory::create_floating_platform(
+	const Coord& top_left,const int width, const int height
+) {
+	ConsoleFloatingPlatform* platform = new ConsoleFloatingPlatform(top_left,width,height,mario);
+	float_plat.push_back(platform);
+	game->add_map_movable(platform);
+	game->add_movable(platform);
+	game->add_static_obj(platform);
+	game->add_collisionable(platform);
+	game_map->add_obj(platform);
+}

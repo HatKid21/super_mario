@@ -28,7 +28,11 @@ void Mario::process_horizontal_static_collision(Rect* obj) noexcept {
 	move_horizontally();
 }
 
-void Mario::process_mario_collision(Collisionable* mario) noexcept {}
+void Mario::process_mario_collision(Collisionable* mario) noexcept {
+    Mario* m = dynamic_cast<Mario*>(mario);
+    if (!m) return;
+    m->move_horizontal_offset(hspeed);
+}
 
 void Mario::process_vertical_static_collision(Rect* obj) noexcept {
 	if (vspeed > 0) {

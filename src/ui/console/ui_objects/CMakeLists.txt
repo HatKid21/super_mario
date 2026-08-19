@@ -8,6 +8,7 @@ target_sources(${PROJECT_NAME}
 		console_ship.cpp
 		console_flying_enemy.cpp
 		console_jumping_enemy.cpp
+		console_floating_platform.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
