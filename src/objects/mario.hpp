@@ -1,12 +1,9 @@
 #pragma once
 
-#include "collisionable.hpp"
-#include "movable.hpp"
-#include "rect.hpp"
-#include "speed.hpp"
+#include "move_collisionable.hpp"
 
 namespace biv {
-	class Mario : public Movable, public Collisionable {
+	class Mario : public MoveCollisionable {
 		public:
 			Mario(const Coord& top_left, const int width, const int height);
 

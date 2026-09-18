@@ -26,6 +26,37 @@ void Game::add_static_obj(Rect* obj) {
 	static_objs.push_back(obj);
 }
 
+void Game::add_move_collisionable(MoveCollisionable* obj) {
+	move_collisionable_objs.push_back(obj);
+}
+
+void Game::add_floating_platform(MoveCollisionable* platform) {
+	floating_platforms.push_back(platform);
+}
+
+void Game::check_move_collisions() noexcept {
+    for (MoveCollisionable* obj : move_collisionable_objs) {
+        for (MoveCollisionable* platform : floating_platforms) {
+
+            obj->move_vertical_offset(1);
+            if (obj->has_collision(platform)) {
+                obj->move_horizontal_offset(platform->get_speed().h);
+            }
+            obj->move_vertical_offset(-1);
+
+        }
+    }
+}
+
+void Game::remove_move_collisionable(MoveCollisionable* obj) {
+	remove_obj(move_collisionable_objs, obj);
+}
+
+void Game::remove_floating_platform(MoveCollisionable* platform) {
+	remove_obj(floating_platforms, platform);
+}
+
+
 void Game::check_horizontally_static_collisions() noexcept {
 	for (Collisionable* obj: collisionable_objs) {
 		for (Rect* static_obj: static_objs) {
@@ -136,6 +167,8 @@ void Game::remove_objs() {
 	movable_objs.clear();
 	static_objs.clear();
 	remove_mario();
+    move_collisionable_objs.clear();
+	floating_platforms.clear();
 }
 
 void Game::remove_static_obj(Rect* obj) {

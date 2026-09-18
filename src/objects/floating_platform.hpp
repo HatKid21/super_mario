@@ -1,18 +1,15 @@
 #pragma once
 
-#include "ship.hpp"
-#include "movable.hpp"
-#include "collisionable.hpp"
-#include "game.hpp"
+#include "rect_map_movable_adapter.hpp"
+#include "move_collisionable.hpp"
 
 namespace biv{
-	class FloatingPlatform : public Ship, public Movable, public Collisionable{
+	class FloatingPlatform : public RectMapMovableAdapter, public MoveCollisionable{
 		private:
-			Mario* mario;
 			const int FLOATING_RANGE = 10;
 			int start_x;
 		public:
-			FloatingPlatform(const Coord& top_left, const int width, const int height,Mario* mario);
+			FloatingPlatform(const Coord& top_left, const int width, const int height);
 
 			Rect get_rect() const noexcept override;
 			Speed get_speed() const noexcept override;

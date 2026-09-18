@@ -6,7 +6,7 @@
 namespace biv{
 	class ConsoleFloatingPlatform : public FloatingPlatform, public ConsoleUIObjectRectAdapter{
 		public:
-			ConsoleFloatingPlatform(const Coord& top_left, const int width, const int height, Mario* mario);
+			ConsoleFloatingPlatform(const Coord& top_left, const int width, const int height);
 
 			char get_brush() const noexcept override;
 	};

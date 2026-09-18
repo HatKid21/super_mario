@@ -1,12 +1,11 @@
 #include <cmath>
 
 #include "floating_platform.hpp"
-#include "mario.hpp"
 
 using biv::FloatingPlatform;
 
-FloatingPlatform::FloatingPlatform(const Coord& top_left, const int width, const int height,Mario* mario)
-	: Ship(top_left,width,height),start_x(top_left.x), mario(mario){
+FloatingPlatform::FloatingPlatform(const Coord& top_left, const int width, const int height)
+	: RectMapMovableAdapter(top_left,width,height),start_x(top_left.x){
 	hspeed = 0.3f;
 	vspeed = 0;
 }
@@ -20,14 +19,11 @@ biv::Speed FloatingPlatform::get_speed() const noexcept {
 }
 
 void FloatingPlatform::move_horizontally() noexcept{
-    float saved_x = top_left.x;
-    top_left.x += hspeed;
-
-    if (std::abs(start_x - top_left.x) >= FLOATING_RANGE || has_collision(mario)) {
-        top_left.x = saved_x;
+    if (std::abs(start_x - top_left.x) >= FLOATING_RANGE) {
         hspeed = -hspeed;
     }
 
+    top_left.x += hspeed;
 }
 
 void FloatingPlatform::move_vertically() noexcept{

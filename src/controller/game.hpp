@@ -11,6 +11,7 @@
 #include "mario.hpp"
 #include "movable.hpp"
 #include "rect.hpp"
+#include "move_collisionable.hpp"
 
 namespace biv {
 	class Game {
@@ -20,6 +21,9 @@ namespace biv {
 			std::vector<Collisionable*> collisionable_objs;
 			std::vector<Movable*> movable_objs;
 			
+            std::vector<MoveCollisionable*> move_collisionable_objs;
+            std::vector<MoveCollisionable*> floating_platforms;
+
 			Mario* mario = nullptr;
 			
 			bool is_finished_ = false;
@@ -28,6 +32,14 @@ namespace biv {
 		public:
 			Game();
 			
+            void add_move_collisionable(MoveCollisionable*);
+            void add_floating_platform(MoveCollisionable*);
+
+            void check_move_collisions() noexcept;
+
+            void remove_move_collisionable(MoveCollisionable*);
+            void remove_floating_platform(MoveCollisionable*);
+
 			void add_collisionable(Collisionable*);
 			void add_map_movable(MapMovable*);
 			void add_mario(Mario*);

@@ -38,6 +38,7 @@ void ConsoleUIFactory::create_enemy(
 	game->add_movable(enemy);
 	game->add_collisionable(enemy);
 	game_map->add_obj(enemy);
+    game->add_move_collisionable(enemy);
 }
 
 void ConsoleUIFactory::create_full_box(
@@ -57,6 +58,7 @@ void ConsoleUIFactory::create_mario(
 	game->remove_collisionable(mario);
 	game->remove_movable(mario);
 	game->remove_mario();
+    game->remove_move_collisionable(mario);
 	game_map->remove_obj(mario);
 	delete mario;
 	mario = nullptr;
@@ -66,6 +68,7 @@ void ConsoleUIFactory::create_mario(
 	game->add_movable(mario);
 	game->add_mario(mario);
 	game_map->add_obj(mario);
+    game->add_move_collisionable(mario);
 }
 
 void ConsoleUIFactory::create_money(
@@ -109,6 +112,7 @@ void ConsoleUIFactory::create_flying_enemy(
 	game->add_movable(fEnemy);
 	game->add_collisionable(fEnemy);
 	game_map->add_obj(fEnemy);
+    game->add_move_collisionable(fEnemy);
 }
 
 void ConsoleUIFactory::create_jumping_enemy(
@@ -120,16 +124,18 @@ void ConsoleUIFactory::create_jumping_enemy(
 	game->add_movable(jEnemy);
 	game->add_collisionable(jEnemy);
 	game_map->add_obj(jEnemy);
+    game->add_move_collisionable(jEnemy);
 }
 
 void ConsoleUIFactory::create_floating_platform(
 	const Coord& top_left,const int width, const int height
 ) {
-	ConsoleFloatingPlatform* platform = new ConsoleFloatingPlatform(top_left,width,height,mario);
+	ConsoleFloatingPlatform* platform = new ConsoleFloatingPlatform(top_left,width,height);
 	float_plat.push_back(platform);
 	game->add_map_movable(platform);
 	game->add_movable(platform);
 	game->add_static_obj(platform);
 	game->add_collisionable(platform);
 	game_map->add_obj(platform);
+    game->add_floating_platform(platform);
 }

@@ -1,13 +1,11 @@
 #pragma once
 
-#include "collisionable.hpp"
-#include "movable.hpp"
-#include "rect.hpp"
 #include "rect_map_movable_adapter.hpp"
+#include "move_collisionable.hpp"
 #include "speed.hpp"
 
 namespace biv {
-    class BaseEnemy : public RectMapMovableAdapter, public Movable, public Collisionable {
+    class BaseEnemy : public RectMapMovableAdapter, public MoveCollisionable {
     public:
         BaseEnemy(const Coord& top_left, const int width, const int height);
         virtual ~BaseEnemy() = default;

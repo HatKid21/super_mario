@@ -5,7 +5,7 @@
 using biv::Mario;
 
 Mario::Mario(const Coord& top_left, const int width, const int height) 
-	: Movable(top_left, width, height, 0, 0) {}
+	: MoveCollisionable(top_left, width, height, 0, 0) {}
 
 biv::Rect Mario::get_rect() const noexcept {
 	return {top_left, width, height};
@@ -29,9 +29,6 @@ void Mario::process_horizontal_static_collision(Rect* obj) noexcept {
 }
 
 void Mario::process_mario_collision(Collisionable* mario) noexcept {
-    Mario* m = dynamic_cast<Mario*>(mario);
-    if (!m) return;
-    m->move_horizontal_offset(hspeed);
 }
 
 void Mario::process_vertical_static_collision(Rect* obj) noexcept {
