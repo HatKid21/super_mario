@@ -4,13 +4,13 @@
 
 using biv::FloatingPlatform;
 
-FloatingPlatform::FloatingPlatform(const Coord& top_left, const int width, const int height)
-	: RectMapMovableAdapter(top_left,width,height),start_x(top_left.x){
+FloatingPlatform::FloatingPlatform(const Coord& top_left, const int width, const int height, Mario* mario)
+	: RectMapMovableAdapter(top_left,width,height),start_x(top_left.x),mario(mario){
 	hspeed = 0.3f;
 	vspeed = 0;
 }
 
- biv::Rect FloatingPlatform::get_rect() const noexcept {
+biv::Rect FloatingPlatform::get_rect() const noexcept {
     return {top_left, width, height};
 }
 
@@ -22,8 +22,12 @@ void FloatingPlatform::move_horizontally() noexcept{
     if (std::abs(start_x - top_left.x) >= FLOATING_RANGE) {
         hspeed = -hspeed;
     }
-
     top_left.x += hspeed;
+    if (has_collision(mario)){
+        top_left.x -= hspeed;
+        hspeed = -hspeed;
+    }
+
 }
 
 void FloatingPlatform::move_vertically() noexcept{

@@ -2,14 +2,16 @@
 
 #include "rect_map_movable_adapter.hpp"
 #include "move_collisionable.hpp"
+#include "mario.hpp"
 
 namespace biv{
 	class FloatingPlatform : public RectMapMovableAdapter, public MoveCollisionable{
 		private:
 			const int FLOATING_RANGE = 10;
 			int start_x;
+			Mario* mario;
 		public:
-			FloatingPlatform(const Coord& top_left, const int width, const int height);
+			FloatingPlatform(const Coord& top_left, const int width, const int height, Mario* mario);
 
 			Rect get_rect() const noexcept override;
 			Speed get_speed() const noexcept override;
