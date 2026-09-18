@@ -40,7 +40,7 @@ void Game::check_move_collisions() noexcept {
 
             obj->move_vertical_offset(1);
             if (obj->has_collision(platform)) {
-                obj->move_horizontal_offset(platform->get_speed().h);
+                obj->move_platform(platform);
             }
             obj->move_vertical_offset(-1);
 
