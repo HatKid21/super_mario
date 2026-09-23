@@ -64,7 +64,9 @@ namespace biv {
 			) override;
 			
 			void create_floating_platform(
-				const Coord& top_left,const int width, const int height
+				const Coord& top_left, const int width, const int height,
+				const int floating_range = 10,
+				const float horizontal_speed = 0.3f
 			) override;
 	};
 }

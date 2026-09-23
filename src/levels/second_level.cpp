@@ -27,7 +27,7 @@ void SecondLevel::init_data() {
 	ui_factory->create_mario({39, 10}, 3, 3);
 	
 	//extra
-	ui_factory->create_floating_platform({100,12},7,2);
+	ui_factory->create_floating_platform({100,12},7,2,20,0.5f);
 	ui_factory->create_full_box({94,2},4,4);
 
 	//initial layout
@@ -42,7 +42,7 @@ void SecondLevel::init_data() {
 	ui_factory->create_enemy({20,15},3,2);
 	ui_factory->create_enemy({55,15},3,2);
 
-	ui_factory->create_jumping_enemy({65,15},3,2,0.1f);
+	ui_factory->create_jumping_enemy({65,15},3,2);
 
 	ui_factory->create_flying_enemy({124,3},3,2,0.5f);
 

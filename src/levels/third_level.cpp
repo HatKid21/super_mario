@@ -55,10 +55,10 @@ void ThirdLevel::init_data(){
 	ui_factory->create_ship({173,25},10,5);
 
 	//floating platforms
-	ui_factory->create_floating_platform({200,22},6,2);
-	ui_factory->create_floating_platform({230,17},6,2);
-	ui_factory->create_floating_platform({260,13},6,2);
-	ui_factory->create_floating_platform({290,15},6,2);
+	ui_factory->create_floating_platform({200,22},6,2,15,0.1f);
+	ui_factory->create_floating_platform({230,17},6,2,13,0.6f);
+	ui_factory->create_floating_platform({260,13},6,2,17,0.15f);
+	ui_factory->create_floating_platform({290,15},6,2,20,0.5f);
 
 	//third island
 	ui_factory->create_ship({330,25},150,5);

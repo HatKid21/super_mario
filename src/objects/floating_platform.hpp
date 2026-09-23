@@ -7,11 +7,15 @@
 namespace biv{
 	class FloatingPlatform : public RectMapMovableAdapter, public MoveCollisionable{
 		private:
-			const int FLOATING_RANGE = 10;
+			const int floating_range;
 			int start_x;
 			Mario* mario;
 		public:
-			FloatingPlatform(const Coord& top_left, const int width, const int height, Mario* mario);
+			FloatingPlatform(
+				const Coord& top_left, const int width, const int height, Mario* mario,
+				const int floating_range = 10,
+				const float horizontal_speed = 0.3f
+			);
 
 			Rect get_rect() const noexcept override;
 			Speed get_speed() const noexcept override;

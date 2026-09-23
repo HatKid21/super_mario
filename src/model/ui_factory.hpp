@@ -44,6 +44,8 @@ namespace biv {
 				const float horizontal_speed = 0.0f) = 0;
 			
 			virtual void create_floating_platform(
-				const Coord& top_left, const int width, const int height) = 0;
+				const Coord& top_left, const int width, const int height,
+				const int floating_range = 10,
+				const float horizontal_speed = 0.3f) = 0;
 	};
 }
