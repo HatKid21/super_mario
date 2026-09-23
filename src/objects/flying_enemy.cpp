@@ -4,8 +4,11 @@
 
 using biv::FlyingEnemy;
 
-FlyingEnemy::FlyingEnemy(const Coord& top_left, const int width, const int height)
-	: BaseEnemy(top_left, width, height),start_x(top_left.x) {
+FlyingEnemy::FlyingEnemy(
+	const Coord& top_left, const int width, const int height,
+	const float horizontal_speed
+)
+	: BaseEnemy(top_left, width, height, horizontal_speed),start_x(top_left.x) {
 	vspeed = 0;
 }
 

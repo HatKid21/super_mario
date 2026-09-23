@@ -42,14 +42,14 @@ void SecondLevel::init_data() {
 	ui_factory->create_enemy({20,15},3,2);
 	ui_factory->create_enemy({55,15},3,2);
 
-	ui_factory->create_jumping_enemy({65,15},3,2);
+	ui_factory->create_jumping_enemy({65,15},3,2,0.1f);
 
-	ui_factory->create_flying_enemy({124,3},3,2);
+	ui_factory->create_flying_enemy({124,3},3,2,0.5f);
 
-	ui_factory->create_enemy({92,15},3,2);
-	ui_factory->create_flying_enemy({100,18},3,2);
+	ui_factory->create_enemy({92,15},3,2,0.3f);
+	ui_factory->create_flying_enemy({100,18},3,2,0.7f);
 	
-	ui_factory->create_enemy({155,15},3,2);
+	ui_factory->create_enemy({155,15},3,2,0.6);
 	ui_factory->create_jumping_enemy({151,15},3,2);
 	ui_factory->create_jumping_enemy({181,18},3,2);
 

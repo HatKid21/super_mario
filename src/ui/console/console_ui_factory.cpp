@@ -30,9 +30,10 @@ void ConsoleUIFactory::create_box(
 }
 
 void ConsoleUIFactory::create_enemy(
-	const Coord& top_left, const int width, const int height
+	const Coord& top_left, const int width, const int height,
+	const float horizontal_speed
 ) {
-	ConsoleEnemy* enemy = new ConsoleEnemy(top_left, width, height);
+	ConsoleEnemy* enemy = new ConsoleEnemy(top_left, width, height, horizontal_speed);
 	enemies.push_back(enemy);
 	game->add_map_movable(enemy);
 	game->add_movable(enemy);
@@ -104,9 +105,10 @@ biv::Mario* ConsoleUIFactory::get_mario() {
 }
 
 void ConsoleUIFactory::create_flying_enemy(
-	const Coord& top_left,const int width, const int height
+	const Coord& top_left,const int width, const int height,
+	const float horizontal_speed
 ) {
-	ConsoleFlyingEnemy* fEnemy = new ConsoleFlyingEnemy(top_left,width,height);
+	ConsoleFlyingEnemy* fEnemy = new ConsoleFlyingEnemy(top_left,width,height,horizontal_speed);
 	flying.push_back(fEnemy);
 	game->add_map_movable(fEnemy);
 	game->add_movable(fEnemy);
@@ -116,9 +118,10 @@ void ConsoleUIFactory::create_flying_enemy(
 }
 
 void ConsoleUIFactory::create_jumping_enemy(
-	const Coord& top_left,const int width, const int height
+	const Coord& top_left,const int width, const int height,
+	const float horizontal_speed
 ) {
-	ConsoleJumpingEnemy* jEnemy = new ConsoleJumpingEnemy(top_left,width,height);
+	ConsoleJumpingEnemy* jEnemy = new ConsoleJumpingEnemy(top_left,width,height,horizontal_speed);
 	jumping.push_back(jEnemy);
 	game->add_map_movable(jEnemy);
 	game->add_movable(jEnemy);

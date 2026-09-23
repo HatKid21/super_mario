@@ -1,10 +1,13 @@
 #include "base_enemy.hpp"
 
 namespace biv {
-    BaseEnemy::BaseEnemy(const Coord& top_left, const int width, const int height)
+    BaseEnemy::BaseEnemy(
+        const Coord& top_left, const int width, const int height,
+        const float horizontal_speed
+    )
         : RectMapMovableAdapter(top_left, width, height) {
         vspeed = 0;
-        hspeed = 0.2f;
+        hspeed = horizontal_speed;
     }
 
     Rect BaseEnemy::get_rect() const noexcept {

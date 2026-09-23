@@ -35,7 +35,8 @@ namespace biv {
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_enemy(
-				const Coord& top_left, const int width, const int height
+				const Coord& top_left, const int width, const int height,
+				const float horizontal_speed = 0.2f
 			) override;
 			void create_full_box(
 				const Coord& top_left, const int width, const int height
@@ -53,11 +54,13 @@ namespace biv {
 			Mario* get_mario() override;
 
 			void create_flying_enemy(
-				const Coord& top_left,const int width, const int height
+				const Coord& top_left, const int width, const int height,
+				const float horizontal_speed = 0.2f
 			) override;
 
 			void create_jumping_enemy(
-				const Coord& top_left,const int width, const int height
+				const Coord& top_left, const int width, const int height,
+				const float horizontal_speed = 0.0f
 			) override;
 			
 			void create_floating_platform(

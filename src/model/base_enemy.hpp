@@ -7,7 +7,10 @@
 namespace biv {
     class BaseEnemy : public RectMapMovableAdapter, public MoveCollisionable {
     public:
-        BaseEnemy(const Coord& top_left, const int width, const int height);
+        BaseEnemy(
+            const Coord& top_left, const int width, const int height,
+            const float horizontal_speed = 0.2f
+        );
         virtual ~BaseEnemy() = default;
 
         Rect get_rect() const noexcept override;

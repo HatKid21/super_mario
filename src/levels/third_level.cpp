@@ -65,13 +65,13 @@ void ThirdLevel::init_data(){
 
 	ui_factory->create_flying_enemy({350,20},3,2);
 	ui_factory->create_flying_enemy({370,17},3,2);
-	ui_factory->create_flying_enemy({389,21},3,2);
-	ui_factory->create_flying_enemy({397,15},3,2);
-	ui_factory->create_flying_enemy({410,19},3,2);
-	ui_factory->create_flying_enemy({423,13},3,2);
-	ui_factory->create_enemy({350,20},3,2);
-	ui_factory->create_enemy({400,20},3,2);
-	ui_factory->create_enemy({385,20},3,2);
+	ui_factory->create_flying_enemy({389,21},3,2,0.1);
+	ui_factory->create_flying_enemy({397,15},3,2,0.3);
+	ui_factory->create_flying_enemy({410,19},3,2,0.7);
+	ui_factory->create_flying_enemy({423,13},3,2,0.5);
+	ui_factory->create_enemy({350,20},3,2,0.15);
+	ui_factory->create_enemy({400,20},3,2,0.5);
+	ui_factory->create_enemy({385,20},3,2,0.3);
 	
 	ui_factory->create_full_box({385,15},4,4);
 	ui_factory->create_full_box({450,15},4,4);
@@ -79,7 +79,7 @@ void ThirdLevel::init_data(){
 	//last bridge
 	ui_factory->create_box({498,20},25,3);
 	ui_factory->create_full_box({510,11},4,4);
-	ui_factory->create_enemy({510,16},3,2);
+	ui_factory->create_enemy({510,16},3,2,0.15f);
 
 	//finish island
 	ui_factory->create_ship({540,25},10,5);

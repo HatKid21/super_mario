@@ -7,7 +7,10 @@ namespace biv{
 		private:
 			float start_x;
 		public:
-			FlyingEnemy(const Coord& top_left, const int width, const int height);
+			FlyingEnemy(
+				const Coord& top_left, const int width, const int height,
+				const float horizontal_speed = 0.2f
+			);
 
 			void move_vertically() noexcept override;
 			void move_horizontally() noexcept override;

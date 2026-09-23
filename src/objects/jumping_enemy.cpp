@@ -2,9 +2,11 @@
 
 using biv::JumpingEnemy;
 
-JumpingEnemy::JumpingEnemy(const Coord& top_left,const int width, const int height)
-	: BaseEnemy(top_left,width,height){
-	hspeed = 0;
+JumpingEnemy::JumpingEnemy(
+	const Coord& top_left,const int width, const int height,
+	const float horizontal_speed
+)
+	: BaseEnemy(top_left,width,height,horizontal_speed){
 }
 
 void JumpingEnemy::process_horizontal_static_collision(Rect*) noexcept{
@@ -22,4 +24,3 @@ void JumpingEnemy::process_vertical_static_collision(Rect*) noexcept{
 //void JumpingEnemy::jump() noexcept{
 //	vspeed -= JUMP_STRENGTH;
 //}
-
