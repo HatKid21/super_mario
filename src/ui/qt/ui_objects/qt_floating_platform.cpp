@@ -1,4 +1,5 @@
 #include "qt_floating_platform.hpp"
+#include "sprites.hpp"
 
 using hatkid::QtFloatingPlatform;
 
@@ -19,7 +20,7 @@ QtFloatingPlatform::QtFloatingPlatform(
           floatingRange,
           horizontalSpeed
       ),
-      sprite(":/sprites/flying_platform.png") {}
+      sprite(Sprites::get(":/sprites/flying_platform.png")) {}
 
 const QPixmap& QtFloatingPlatform::getSprite() const noexcept {
     return sprite;

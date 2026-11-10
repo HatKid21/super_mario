@@ -1,4 +1,5 @@
 #include "qt_flying_enemy.hpp"
+#include "sprites.hpp"
 
 using hatkid::QtFlyingEnemy;
 
@@ -10,7 +11,7 @@ QtFlyingEnemy::QtFlyingEnemy(
 )
     : biv::Rect(topLeft, width, height),
       biv::FlyingEnemy(topLeft, width, height, horizontalSpeed),
-      sprite(":/sprites/flying_enemy.png") {}
+      sprite(Sprites::get(":/sprites/flying_enemy.png")) {}
 
 const QPixmap& QtFlyingEnemy::getSprite() const noexcept {
     return sprite;

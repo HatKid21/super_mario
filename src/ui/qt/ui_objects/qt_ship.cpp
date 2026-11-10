@@ -1,4 +1,5 @@
 #include "qt_ship.hpp"
+#include "sprites.hpp"
 
 using hatkid::QtShip;
 
@@ -9,7 +10,7 @@ QtShip::QtShip(
 ) : 
   biv::Rect(topLeft,width,height),
   biv::Ship(topLeft,width,height),
-  sprite(":/sprites/ground.png"){}
+  sprite(Sprites::get(":/sprites/ground.png")){}
 
 const QPixmap& QtShip::getSprite() const noexcept{
   return sprite;

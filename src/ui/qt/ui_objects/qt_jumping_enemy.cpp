@@ -1,4 +1,5 @@
 #include "qt_jumping_enemy.hpp"
+#include "sprites.hpp"
 
 using hatkid::QtJumpingEnemy;
 
@@ -10,7 +11,7 @@ QtJumpingEnemy::QtJumpingEnemy(
 )
     : biv::Rect(topLeft, width, height),
       biv::JumpingEnemy(topLeft, width, height, horizontalSpeed),
-      sprite(":/sprites/jumping_enemy.png") {}
+      sprite(Sprites::get(":/sprites/jumping_enemy.png")) {}
 
 const QPixmap& QtJumpingEnemy::getSprite() const noexcept {
     return sprite;

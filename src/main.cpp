@@ -26,6 +26,8 @@
 
     #include "game_window.hpp"
     #include "qt_ui_factory.hpp"
+    #include "sprites.hpp"
+
 #else
     #include "console_ui_factory.hpp"
 #endif
@@ -88,7 +90,8 @@ int main(int argc,char* argv[]) {
   #else
     biv::ConsoleUIFactory factory(&game);
   #endif
-  biv::UIFactory* ui_factory = &factory;	biv::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
+  biv::UIFactory* ui_factory = &factory;
+  biv::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
 	
   biv::GameLevel* game_level = new biv::FirstLevel(ui_factory);
 	biv::Mario* mario = ui_factory->get_mario();
@@ -180,5 +183,8 @@ int main(int argc,char* argv[]) {
 	
 	// 6. Завершение
   keyboard->off();
+  #ifdef QT_UI
+    hatkid::Sprites::clear();
+  #endif
 }
 

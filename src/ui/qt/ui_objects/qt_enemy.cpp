@@ -1,4 +1,5 @@
 #include "qt_enemy.hpp"
+#include "sprites.hpp"
 
 using hatkid::QtEnemy;
 
@@ -10,7 +11,7 @@ QtEnemy::QtEnemy(
 )
     : biv::Rect(topLeft, width, height),
       biv::Enemy(topLeft, width, height, horizontalSpeed),
-      sprite(":/sprites/enemy.png") {}
+      sprite(Sprites::get(":/sprites/enemy.png")) {}
 
 const QPixmap& QtEnemy::getSprite() const noexcept {
     return sprite;

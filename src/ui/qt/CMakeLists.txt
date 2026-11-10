@@ -17,7 +17,10 @@ target_sources(${PROJECT_NAME} PRIVATE
     qt_ui_factory.cpp
     qt_ui_factory.hpp
 
-  resources/sprites.qrc
+    sprites.cpp
+    sprites.hpp
+
+    resources/sprites.qrc
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE

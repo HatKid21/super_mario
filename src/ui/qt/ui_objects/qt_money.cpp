@@ -1,4 +1,5 @@
 #include "qt_money.hpp"
+#include "sprites.hpp"
 
 using hatkid::QtMoney;
 
@@ -9,7 +10,7 @@ QtMoney::QtMoney(
 )
     : biv::Rect(topLeft, width, height),
       biv::Money(topLeft, width, height),
-      sprite(":/sprites/money.png") {}
+      sprite(Sprites::get(":/sprites/money.png")) {}
 
 const QPixmap& QtMoney::getSprite() const noexcept {
     return sprite;

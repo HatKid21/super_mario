@@ -1,4 +1,5 @@
 #include "qt_mario.hpp"
+#include "sprites.hpp"
 
 using hatkid::QtMario;
 
@@ -9,7 +10,7 @@ QtMario::QtMario(
 )
     : biv::Rect(topLeft, width, height),
       biv::Mario(topLeft, width, height),
-      sprite(":/sprites/mario.png") {}
+      sprite(Sprites::get(":/sprites/mario.png")) {}
 
 const QPixmap& QtMario::getSprite() const noexcept {
     return sprite;
