@@ -23,12 +23,15 @@
 
 #include <QApplication>
 
+
 #include "game_window.hpp"
+
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
     hatkid::GameWindow window;
+    window.getKeyboard()->on();
     window.show();
 
     return app.exec();
