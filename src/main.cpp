@@ -25,16 +25,36 @@
 
 
 #include "game_window.hpp"
-
+#include "qt_game_map.hpp"
+#include "qt_mario.hpp"
+#include "qt_box.hpp"
+#include "qt_ship.hpp"
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
     hatkid::GameWindow window;
+
+    hatkid::QtMario mario({39, 22}, 3, 3);
+    hatkid::QtBox box({50, 15}, 5, 3);
+    hatkid::QtShip ship({20, 25}, 40, 2);
+
+    hatkid::QtGameMap gameMap(30, 200, &window);
+
+    gameMap.addObject(&ship);
+    gameMap.addObject(&box);
+    gameMap.addObject(&mario);
+
+    window.setGameMap(&gameMap);
+
     window.getKeyboard()->on();
     window.show();
 
-    return app.exec();
+    const int result = app.exec();
+
+    window.setGameMap(nullptr);
+
+    return result;
 }
 
 #else

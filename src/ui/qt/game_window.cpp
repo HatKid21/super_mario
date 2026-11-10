@@ -1,4 +1,5 @@
 #include "game_window.hpp"
+#include "qt_game_map.hpp"
 
 #include <QColor>
 #include <QPainter>
@@ -13,7 +14,6 @@ GameWindow::GameWindow(QWidget* parent) : QWidget(parent), keyboard(new QtKeyboa
   setWindowTitle("Super Mario");
   resize(1000,600);
   setFocusPolicy(Qt::StrongFocus);
-  mario_sprite.load(":/sprites/mario.png");
 
   connect(
     this, &GameWindow::keyPressed,
@@ -61,34 +61,17 @@ void GameWindow::focusOutEvent(QFocusEvent* event) {
 void GameWindow::paintEvent(QPaintEvent*) {
     QPainter painter(this);
 
-    painter.fillRect(
-        rect(),
-        QColor(135, 206, 235)
-    );
-
-    painter.fillRect(
-    0,
-    height() - 80,
-    width(),
-    80,
-    QColor(139, 90, 43)
-    );
-    const QRect mario_rect(
-      100,
-      height() - 80 - 48,
-      32,
-      48
-    );
-
-    if (mario_sprite.isNull()) {
-      painter.fillRect(
-          mario_rect,
-          QColor(220, 50, 50)
-      );
+    if (gameMap != nullptr) {
+        gameMap->draw(painter, rect());
     } else {
-        painter.drawPixmap(
-            mario_rect,
-            mario_sprite
+        painter.fillRect(
+            rect(),
+            QColor(135, 206, 235)
         );
-    };
+    }
+}
+
+void GameWindow::setGameMap(QtGameMap* map) {
+    gameMap = map;
+    update();
 }

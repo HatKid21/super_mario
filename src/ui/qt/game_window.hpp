@@ -1,19 +1,21 @@
 #pragma once
 
 #include <QWidget>
-#include <QPixmap>
 
 #include "qt_keyboard.hpp"
 
+
 namespace hatkid {
+    class QtGameMap;
     class GameWindow : public QWidget {
       Q_OBJECT
         private:
-          QPixmap mario_sprite;
+          QtGameMap* gameMap = nullptr;
           QtKeyboard* keyboard;
         public:
             explicit GameWindow(QWidget* parent = nullptr);
             biv::KeyBoard* getKeyboard() const;
+            void setGameMap(QtGameMap* map);
         protected:
             void paintEvent(QPaintEvent* event) override;
 

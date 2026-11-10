@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/sprites">
         <file alias="mario.png">sprites/mario.png</file>
+        <file alias="brick.png">sprites/brick.png</file>
+        <file alias="ground.png">sprites/ground.png</file>
     </qresource>
 </RCC>
