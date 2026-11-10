@@ -19,60 +19,17 @@
 	- Приведите примеры кода, отображающие этот прицип.
 */
 
-#ifdef QT_UI
-
-#include <QApplication>
-
-
-#include "game_window.hpp"
-#include "qt_game_map.hpp"
-#include "qt_mario.hpp"
-#include "qt_box.hpp"
-#include "qt_ship.hpp"
-#include "qt_enemy.hpp"
-#include "qt_money.hpp"
-#include "qt_full_box.hpp"
-
-int main(int argc, char* argv[]) {
-    QApplication app(argc, argv);
-
-    hatkid::GameWindow window;
-
-    hatkid::QtMario mario({39, 22}, 3, 3);
-    hatkid::QtBox box({50, 15}, 5, 3);
-    hatkid::QtShip ship({20, 25}, 40, 2);
-    hatkid::QtEnemy enemy({48, 23}, 3, 2);
-    hatkid::QtMoney money({40, 18}, 3, 2);
-    hatkid::QtFullBox fullBox({60, 15}, 5, 3, nullptr);
-    fullBox.kill();
-
-    hatkid::QtGameMap gameMap(30, 200, &window);
-
-    gameMap.addObject(&ship);
-    gameMap.addObject(&box);
-    gameMap.addObject(&mario);
-    gameMap.addObject(&enemy);
-    gameMap.addObject(&money);
-    gameMap.addObject(&fullBox);
-
-    window.setGameMap(&gameMap);
-
-    window.getKeyboard()->on();
-    window.show();
-
-    const int result = app.exec();
-
-    window.setGameMap(nullptr);
-
-    return result;
-}
-
-#else
-
-
 #include <thread>
 
-#include "console_ui_factory.hpp"
+#ifdef QT_UI
+    #include <QApplication>
+
+    #include "game_window.hpp"
+    #include "qt_ui_factory.hpp"
+#else
+    #include "console_ui_factory.hpp"
+#endif
+
 #include "first_level.hpp"
 #include "game.hpp"
 #include "game_level.hpp"
@@ -91,9 +48,13 @@ int main(int argc, char* argv[]) {
 	#include "ncurses.h"
 #endif
 
-int main() {
+int main(int argc,char* argv[]) {
 	// 1. Установка параметров игры
 	using namespace std::chrono_literals;
+  #ifdef QT_UI
+    QApplication app(argc, argv);
+    hatkid::GameWindow window;
+  #endif
 	
 	const int map_height = 30;
 	const int map_weight = 200;
@@ -101,7 +62,7 @@ int main() {
 	
 	biv::OSControlSettings* control_settings = nullptr;
 	biv::KeyBoard* keyboard = nullptr;
-	#ifdef WINDOWS_CONSOLE
+  #ifdef WINDOWS_CONSOLE
 		control_settings = new biv::WindowsControlSettings();
 		keyboard = new biv::WindowsKeyBoard();
 		frame_delay = std::chrono::milliseconds(10);
@@ -109,19 +70,43 @@ int main() {
 		control_settings = new biv::LinuxControlSettings(map_height, map_weight);
 		keyboard = new biv::LinuxKeyboard();
 		frame_delay = std::chrono::milliseconds(33);
-	#endif
+  #elif defined(QT_UI)
+    keyboard = window.getKeyboard();
+    frame_delay = std::chrono::milliseconds(33);
+  #endif
+
+
 	
-	control_settings->init();
-	keyboard->on();
+	if (control_settings != nullptr) {
+    control_settings->init();
+  }
+  keyboard->on();
 	
 	biv::Game game;
-	biv::UIFactory* ui_factory = new biv::ConsoleUIFactory(&game);
-	biv::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
-	biv::GameLevel* game_level = new biv::FirstLevel(ui_factory);
+  #ifdef QT_UI
+    hatkid::QtUIFactory factory(&game, &window);
+  #else
+    biv::ConsoleUIFactory factory(&game);
+  #endif
+  biv::UIFactory* ui_factory = &factory;	biv::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
+	
+  biv::GameLevel* game_level = new biv::FirstLevel(ui_factory);
 	biv::Mario* mario = ui_factory->get_mario();
+
+  #ifdef QT_UI
+    window.show();
+  #endif
 	
 	biv::UserInput user_input;
 	do {
+    #ifdef QT_UI
+    QApplication::processEvents();
+
+    if (!window.isVisible()) {
+        game.finish();
+        break;
+    }
+    #endif
 		// 2. Получение пользовательского ввода	
 		user_input = keyboard->get_user_input();
 		switch (user_input) {
@@ -182,8 +167,11 @@ int main() {
 		
 		// 4. Обновление изображения на экране
 		game_map->refresh();
-		control_settings->set_cursor_start_position();
-		game_map->show();
+    if (control_settings != nullptr) {
+        control_settings->set_cursor_start_position();
+    }
+    game_map->show();
+
 		std::this_thread::sleep_for(frame_delay);
 	} while (
 		/* 5. Проверка того, не окончена ли игра */ 
@@ -191,6 +179,6 @@ int main() {
 	);
 	
 	// 6. Завершение
+  keyboard->off();
 }
 
-#endif

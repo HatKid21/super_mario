@@ -14,6 +14,9 @@ target_sources(${PROJECT_NAME} PRIVATE
     qt_game_map.cpp
     qt_game_map.hpp
 
+    qt_ui_factory.cpp
+    qt_ui_factory.hpp
+
   resources/sprites.qrc
 )
 
