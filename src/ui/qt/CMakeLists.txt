@@ -1,0 +1,9 @@
+target_sources(${PROJECT_NAME} PRIVATE
+    game_window.cpp
+    game_window.hpp
+    resources/sprites.qrc
+)
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+)

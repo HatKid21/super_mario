@@ -18,6 +18,25 @@
 	- Какими элементами языка С++ реализуется этот принцип?
 	- Приведите примеры кода, отображающие этот прицип.
 */
+
+#ifdef QT_UI
+
+#include <QApplication>
+
+#include "game_window.hpp"
+
+int main(int argc, char* argv[]) {
+    QApplication app(argc, argv);
+
+    hatkid::GameWindow window;
+    window.show();
+
+    return app.exec();
+}
+
+#else
+
+
 #include <thread>
 
 #include "console_ui_factory.hpp"
@@ -140,3 +159,5 @@ int main() {
 	
 	// 6. Завершение
 }
+
+#endif
