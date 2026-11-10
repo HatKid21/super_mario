@@ -29,6 +29,9 @@
 #include "qt_mario.hpp"
 #include "qt_box.hpp"
 #include "qt_ship.hpp"
+#include "qt_enemy.hpp"
+#include "qt_money.hpp"
+#include "qt_full_box.hpp"
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
@@ -38,12 +41,19 @@ int main(int argc, char* argv[]) {
     hatkid::QtMario mario({39, 22}, 3, 3);
     hatkid::QtBox box({50, 15}, 5, 3);
     hatkid::QtShip ship({20, 25}, 40, 2);
+    hatkid::QtEnemy enemy({48, 23}, 3, 2);
+    hatkid::QtMoney money({40, 18}, 3, 2);
+    hatkid::QtFullBox fullBox({60, 15}, 5, 3, nullptr);
+    fullBox.kill();
 
     hatkid::QtGameMap gameMap(30, 200, &window);
 
     gameMap.addObject(&ship);
     gameMap.addObject(&box);
     gameMap.addObject(&mario);
+    gameMap.addObject(&enemy);
+    gameMap.addObject(&money);
+    gameMap.addObject(&fullBox);
 
     window.setGameMap(&gameMap);
 

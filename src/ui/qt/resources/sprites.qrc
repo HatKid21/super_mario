@@ -3,5 +3,12 @@
         <file alias="mario.png">sprites/mario.png</file>
         <file alias="brick.png">sprites/brick.png</file>
         <file alias="ground.png">sprites/ground.png</file>
+        <file alias="enemy.png">sprites/enemy.png</file>
+        <file alias="money.png">sprites/money.png</file>
+        <file alias="question_block.png">sprites/question_block.png</file>
+        <file alias="used_block.png">sprites/used_block.png</file>
+        <file alias="flying_enemy.png">sprites/flying_enemy.png</file>
+        <file alias="jumping_enemy.png">sprites/jumping_enemy.png</file>
+        <file alias="flying_platform.png">sprites/flying_platform.png</file>
     </qresource>
 </RCC>
