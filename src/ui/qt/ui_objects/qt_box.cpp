@@ -15,3 +15,7 @@ QtBox::QtBox(
 const QPixmap& QtBox::getSprite() const noexcept {
     return sprite;
 }
+
+QSizeF QtBox::getTileSize() const noexcept {
+    return QSizeF(3, 1);
+}

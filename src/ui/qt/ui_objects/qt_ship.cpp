@@ -15,3 +15,7 @@ QtShip::QtShip(
 const QPixmap& QtShip::getSprite() const noexcept{
   return sprite;
 }
+
+QSizeF QtShip::getTileSize() const noexcept {
+    return QSizeF(3, 1);
+}

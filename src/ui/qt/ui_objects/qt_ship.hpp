@@ -17,5 +17,6 @@ namespace hatkid {
       );
 
       const QPixmap& getSprite() const noexcept override;
+      QSizeF getTileSize() const noexcept override;
   };
 }

@@ -76,15 +76,38 @@ void QtGameMap::draw(
                 bounds,
                 QColor(220, 50, 50)
             );
-        } else {
+            continue;
+        }
+
+        const QSizeF tileSize = object->getTileSize();
+
+        if (tileSize.width() <= 0 || tileSize.height() <= 0) {
             painter.drawPixmap(
                 bounds,
                 sprite,
                 QRectF(sprite.rect())
             );
+            continue;
         }
+
+        painter.save();
+        painter.setClipRect(bounds, Qt::IntersectClip);
+
+        for (qreal y = bounds.top(); y < bounds.bottom(); y += tileSize.height()) {
+            for (qreal x = bounds.left(); x < bounds.right(); x += tileSize.width()) {
+                const QRectF tileRect(
+                    x,
+                    y,
+                    tileSize.width(),
+                    tileSize.height()
+                );
+
+                painter.drawPixmap(tileRect, sprite, QRectF(sprite.rect()));
+            }
+        }
+
+        painter.restore();
     }
 
     painter.restore();
 }
-
