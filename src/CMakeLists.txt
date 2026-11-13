@@ -23,6 +23,7 @@ add_subdirectory(model)
 add_subdirectory(objects)
 add_subdirectory(ui)
 add_subdirectory(util)
+add_subdirectory(app)
 
 if(GAME_TYPE STREQUAL "WindowsConsole")
     target_compile_definitions(${PROJECT_NAME} PRIVATE WINDOWS_CONSOLE)

@@ -21,95 +21,60 @@
 
 #include <thread>
 
-#ifdef QT_UI
-    #include <QApplication>
-
-    #include "game_window.hpp"
-    #include "qt_ui_factory.hpp"
-    #include "sprites.hpp"
-
-#else
-    #include "console_ui_factory.hpp"
-#endif
-
+#include "app_factory.hpp"
 #include "first_level.hpp"
 #include "game.hpp"
 #include "game_level.hpp"
 #include "game_map.hpp"
-#include "keyboard.hpp"
 #include "mario.hpp"
-#include "os_control_settings.hpp"
-#include "ui_factory.hpp"
 
-#ifdef WINDOWS_CONSOLE
-	#include "windows_control_settings.hpp"
-	#include "windows_keyboard.hpp"
+#if defined(QT_UI)
+    #include "qt_app_factory.hpp"
+    using SelectedAppFactory = hatkid::QtAppFactory;
 #elif defined(LINUX_CONSOLE)
-	#include "linux_control_settings.hpp"
-	#include "linux_keyboard.hpp"
-	#include "ncurses.h"
+    #include "linux_app_factory.hpp"
+    using SelectedAppFactory = hatkid::LinuxAppFactory;
+#elif defined(WINDOWS_CONSOLE)
+    #include "windows_app_factory.hpp"
+    using SelectedAppFactory = hatkid::WindowsAppFactory;
 #endif
 
 int main(int argc,char* argv[]) {
 	// 1. Установка параметров игры
 	using namespace std::chrono_literals;
-  #ifdef QT_UI
-    QApplication app(argc, argv);
-    hatkid::GameWindow window;
-  #endif
-	
+
+    hatkid::AppFactory* appFactory = new SelectedAppFactory(argc,argv);
+
 	const int map_height = 30;
 	const int map_weight = 200;
-	auto frame_delay = std::chrono::milliseconds(0);
+	auto frame_delay = appFactory->getFrameDelay();
 	
-	biv::OSControlSettings* control_settings = nullptr;
-	biv::KeyBoard* keyboard = nullptr;
-  #ifdef WINDOWS_CONSOLE
-		control_settings = new biv::WindowsControlSettings();
-		keyboard = new biv::WindowsKeyBoard();
-		frame_delay = std::chrono::milliseconds(10);
-	#elif defined(LINUX_CONSOLE)
-		control_settings = new biv::LinuxControlSettings(map_height, map_weight);
-		keyboard = new biv::LinuxKeyboard();
-		frame_delay = std::chrono::milliseconds(33);
-  #elif defined(QT_UI)
-    keyboard = window.getKeyboard();
-    frame_delay = std::chrono::milliseconds(33);
-  #endif
-
-
-	
+	biv::OSControlSettings* control_settings = 
+        appFactory->getControlSettings(map_height,map_weight);
+	biv::KeyBoard* keyboard =
+        appFactory->getKeyboard();
 	if (control_settings != nullptr) {
-    control_settings->init();
-  }
-  keyboard->on();
+        control_settings->init();
+    }
+    
+    keyboard->on();
 	
 	biv::Game game;
-  #ifdef QT_UI
-    hatkid::QtUIFactory factory(&game, &window);
-  #else
-    biv::ConsoleUIFactory factory(&game);
-  #endif
-  biv::UIFactory* ui_factory = &factory;
-  biv::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
+    biv::UIFactory* ui_factory =
+      appFactory->getFactory(&game);
+    biv::GameMap* game_map = ui_factory->get_game_map(map_height, map_weight);
 	
-  biv::GameLevel* game_level = new biv::FirstLevel(ui_factory);
+    biv::GameLevel* game_level = new biv::FirstLevel(ui_factory);
 	biv::Mario* mario = ui_factory->get_mario();
 
-  #ifdef QT_UI
-    window.show();
-  #endif
-	
+    appFactory->show();
+
 	biv::UserInput user_input;
 	do {
-    #ifdef QT_UI
-    QApplication::processEvents();
-
-    if (!window.isVisible()) {
-        game.finish();
-        break;
-    }
-    #endif
+        if (!appFactory->loopInit()){
+            game.finish();
+            break;
+        }
 		// 2. Получение пользовательского ввода	
 		user_input = keyboard->get_user_input();
 		switch (user_input) {
@@ -182,9 +147,14 @@ int main(int argc,char* argv[]) {
 	);
 	
 	// 6. Завершение
-  keyboard->off();
-  #ifdef QT_UI
-    hatkid::Sprites::clear();
-  #endif
+    keyboard->off();
+    appFactory->destroyKeyboard(keyboard);
+
+    delete ui_factory;
+    delete control_settings;
+
+    appFactory->clear();
+    delete appFactory;
+    
 }
 
